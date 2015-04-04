@@ -34,16 +34,16 @@ require 'json'
 
 class EtcdNodeStatus < Sensu::Plugin::Check::CLI
   option :server,
-         description: 'etcd server',
+         description: 'Etcd host, defaults to localhost',
          short: '-s SERVER',
          long: '--server SERVER',
          default: 'localhost'
 
   option :port,
-         description: 'etcd port',
+         description: 'Etcd port, defaults to 2379',
          short: '-p PORT',
          long: '--port PORT',
-         default: '4001'
+         default: '2379'
 
   def run
     r = RestClient::Resource.new("http://#{config[:server]}:#{config[:port]}/v2/stats/self", timeout: 5).get

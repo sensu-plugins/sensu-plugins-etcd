@@ -46,10 +46,10 @@ class EtcdMetrics < Sensu::Plugin::Metric::CLI::Graphite
          default: 'localhost'
 
   option :etcd_port,
-         description: 'Etcd port, defaults to 4001',
+         description: 'Etcd port, defaults to 2379',
          short: '-p PORT',
          long: '--port PORT',
-         default: '4001'
+         default: '2379'
 
   option :leader_stats,
          description: 'Show leader stats',
