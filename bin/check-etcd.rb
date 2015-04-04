@@ -3,7 +3,7 @@
 #   check-etcd
 #
 # DESCRIPTION:
-#   This plugin checks that the stats/self url returns 200OK
+#   This plugin checks that the stats/self url returns 200 OK.
 #
 # OUTPUT:
 #   plain text
@@ -14,7 +14,6 @@
 # DEPENDENCIES:
 #   gem: sensu-plugin
 #   gem: rest-client
-#   gem: json
 #
 # USAGE:
 #   #YELLOW
@@ -30,13 +29,12 @@
 require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/check/cli'
 require 'rest-client'
-require 'json'
 
 class EtcdNodeStatus < Sensu::Plugin::Check::CLI
   option :server,
          description: 'Etcd host, defaults to localhost',
-         short: '-s SERVER',
-         long: '--server SERVER',
+         short: '-h HOST',
+         long: '--host HOST',
          default: 'localhost'
 
   option :port,
