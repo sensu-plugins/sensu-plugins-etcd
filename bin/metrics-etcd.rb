@@ -27,11 +27,13 @@
 #   for details.
 #
 
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/metric/cli'
 require 'etcd'
 require 'socket'
 
+#
+# Etcd Metrics
+#
 class EtcdMetrics < Sensu::Plugin::Metric::CLI::Graphite
   option :scheme,
          description: 'Metric naming scheme',
@@ -58,7 +60,7 @@ class EtcdMetrics < Sensu::Plugin::Metric::CLI::Graphite
          boolean: true,
          default: false
 
-  def run
+  def run # rubocop:disable all
     client = Etcd.client(host: config[:etcd_host], port: config[:etcd_port])
     client.stats(:self).each do |k, v|
       output([config[:scheme], 'self', k].join('.'), v) if v.is_a? Integer

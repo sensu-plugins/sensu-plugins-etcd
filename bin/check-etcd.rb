@@ -26,10 +26,12 @@
 #   for details.
 #
 
-require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/check/cli'
 require 'rest-client'
 
+#
+# Etcd Node Status
+#
 class EtcdNodeStatus < Sensu::Plugin::Check::CLI
   option :server,
          description: 'Etcd host, defaults to localhost',
