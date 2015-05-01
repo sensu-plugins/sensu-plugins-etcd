@@ -5,56 +5,17 @@
 [![Code Climate](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd/badges/gpa.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd)
 [![Test Coverage](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd/badges/coverage.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd)
 [![Dependency Status](https://gemnasium.com/sensu-plugins/sensu-plugins-etcd.svg)](https://gemnasium.com/sensu-plugins/sensu-plugins-etcd)
-
+[ ![Codeship Status for sensu-plugins/sensu-plugins-etcd](https://codeship.com/projects/55e83d10-d1e4-0132-a14d-4afb0344239b/status?branch=master)](https://codeship.com/projects/77418)
 ## Functionality
 
 ## Files
- * bin/check-etcd
- * bin/metrics-etcd
+ * bin/check-etcd.rb
+ * bin/metrics-etcd.rb
 
 ## Usage
 
 ## Installation
 
-Add the public key (if you haven’t already) as a trusted certificate
-
-```
-gem cert --add <(curl -Ls https://raw.githubusercontent.com/sensu-plugins/sensu-plugins.github.io/master/certs/sensu-plugins.pem)
-gem install sensu-plugins-etcd -P MediumSecurity
-```
-
-You can also download the key from /certs/ within each repository.
-
-#### Rubygems
-
-`gem install sensu-plugins-etcd`
-
-#### Bundler
-
-Add *sensu-plugins-disk-checks* to your Gemfile and run `bundle install` or `bundle update`
-
-#### Chef
-
-Using the Sensu **sensu_gem** LWRP
-```
-sensu_gem 'sensu-plugins-etcd' do
-  options('--prerelease')
-  version '0.0.1.alpha.4'
-end
-```
-
-Using the Chef **gem_package** resource
-```
-gem_package 'sensu-plugins-etcd' do
-  options('--prerelease')
-  version '0.0.1.alpha.4'
-end
-```
+[Installation and Setup](https://github.com/sensu-plugins/documentation/blob/master/user_docs/installation_instructions.md)
 
 ## Notes
-
-[1]:[https://travis-ci.org/sensu-plugins/sensu-plugins-etcd]
-[2]:[http://badge.fury.io/rb/sensu-plugins-etcd]
-[3]:[https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd]
-[4]:[https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd]
-[5]:[https://gemnasium.com/sensu-plugins/sensu-plugins-etcd]
