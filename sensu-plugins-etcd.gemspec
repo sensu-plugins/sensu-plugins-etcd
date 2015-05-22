@@ -38,7 +38,6 @@ Gem::Specification.new do |s|
   s.version                = SensuPluginsEtcd::Version::VER_STRING
 
   s.add_runtime_dependency 'rest-client',  '1.8.0'
-  s.add_runtime_dependency 'json',         '1.8.2'
   s.add_runtime_dependency 'sensu-plugin', '1.1.0'
   s.add_runtime_dependency 'etcd',         '0.3.0'
 
