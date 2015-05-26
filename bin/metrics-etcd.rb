@@ -14,7 +14,6 @@
 # DEPENDENCIES:
 #   gem: sensu-plugin
 #   gem: etcd
-#   gem: socket
 #
 # USAGE:
 #   #YELLOW
