@@ -14,6 +14,16 @@
 
 ## Usage
 
+    Usage: check-etcd.rb (options)
+           --ca CA                      SSL CA file
+           --cert CERT                  client SSL cert
+           --insecure                   change SSL verify mode to false
+           --key KEY                    client SSL key
+           --passphrase PASSPHRASE      passphrase of the SSL key
+       -p, --port PORT                  Etcd port, defaults to 2379
+       -h, --host HOST                  Etcd host, defaults to localhost
+           --ssl                        use HTTPS (default false)
+
 ## Installation
 
 [Installation and Setup](https://github.com/sensu-plugins/documentation/blob/master/user_docs/installation_instructions.md)
