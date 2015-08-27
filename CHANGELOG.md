@@ -5,6 +5,10 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 
 ## Unreleased
 
+## [0.1.0] - 2015-08-27
+### Added
+- SSL support
+
 ## [0.0.3] - 2015-07-14
 ### Changed
 - updated sensu-plugin gem to 1.2.0
