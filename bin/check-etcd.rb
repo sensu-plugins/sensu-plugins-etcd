@@ -77,17 +77,17 @@ class EtcdNodeStatus < Sensu::Plugin::Check::CLI
   def run
     protocol = config[:ssl] ? 'https' : 'http'
 
-    r = RestClient::Resource.new("#{protocol}://#{config[:server]}:#{config[:port]}/v2/stats/self",
+    r = RestClient::Resource.new("#{protocol}://#{config[:server]}:#{config[:port]}/health",
                                  timeout: 5,
                                  ssl_client_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
                                  ssl_client_key: (OpenSSL::PKey::RSA.new(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?),
                                  ssl_ca_file:  config[:ca],
                                  verify_ssl:  config[:insecure] ? 0 : 1
                                 ).get
-    if r.code == 200
-      ok 'etcd is up'
+    if r.code == 200 && JSON.parse(r.to_str)['health'] == 'true'
+      ok 'Etcd healthy'
     else
-      critical 'Etcd is not responding'
+      critical 'Etcd unhealthy'
     end
   rescue Errno::ECONNREFUSED
     critical 'Etcd is not responding'
