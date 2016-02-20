@@ -5,7 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd/badges/gpa.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd)
 [![Test Coverage](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd/badges/coverage.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd)
 [![Dependency Status](https://gemnasium.com/sensu-plugins/sensu-plugins-etcd.svg)](https://gemnasium.com/sensu-plugins/sensu-plugins-etcd)
-[ ![Codeship Status for sensu-plugins/sensu-plugins-etcd](https://codeship.com/projects/55e83d10-d1e4-0132-a14d-4afb0344239b/status?branch=master)](https://codeship.com/projects/77418)
+
 ## Functionality
 
 ## Files
