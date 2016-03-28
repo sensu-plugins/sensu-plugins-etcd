@@ -100,7 +100,7 @@ class EtcdMetrics < Sensu::Plugin::Metric::CLI::Graphite
       )
     else
       client = Etcd.client(host: config[:etcd_host], port: config[:etcd_port])
-    fi
+    end
     client.stats(:self).each do |k, v|
       output([config[:scheme], 'self', k].join('.'), v) if v.is_a? Integer
     end
