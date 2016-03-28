@@ -59,8 +59,48 @@ class EtcdMetrics < Sensu::Plugin::Metric::CLI::Graphite
          boolean: true,
          default: false
 
+  option :cert,
+         description: 'client SSL cert',
+         long: '--cert CERT',
+         default: nil
+
+  option :key,
+         description: 'client SSL key',
+         long: '--key KEY',
+         default: nil
+
+  option :passphrase,
+         description: 'passphrase of the SSL key',
+         long: '--passphrase PASSPHRASE',
+         default: nil
+
+  option :ca,
+         description: 'SSL CA file',
+         long: '--ca CA',
+         default: nil
+
+  option :insecure,
+         description: 'change SSL verify mode to false',
+         long: '--insecure'
+
+  option :ssl,
+         description: 'use HTTPS (default false)',
+         long: '--ssl'
+
   def run
-    client = Etcd.client(host: config[:etcd_host], port: config[:etcd_port])
+    if config[:ssl]
+      client = Etcd.client(
+        host: config[:etcd_host],
+        port: config[:etcd_port],
+        use_ssl: config[:ssl],
+        verify_mode: (config[:insecure]? OpenSSL::SSL::VERIFY_NONE : OpenSSL::SSL::VERIFY_PEER ),
+        ca_file: config[:ca],
+        ssl_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
+        ssl_key:  (OpenSSL::PKey::RSA.new(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?)
+      )
+    else
+      client = Etcd.client(host: config[:etcd_host], port: config[:etcd_port])
+    fi
     client.stats(:self).each do |k, v|
       output([config[:scheme], 'self', k].join('.'), v) if v.is_a? Integer
     end
