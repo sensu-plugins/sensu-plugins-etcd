@@ -29,6 +29,7 @@
 require 'sensu-plugin/check/cli'
 require 'rest-client'
 require 'openssl'
+require 'uri'
 
 #
 # Etcd Node Status
@@ -74,24 +75,53 @@ class EtcdNodeStatus < Sensu::Plugin::Check::CLI
          description: 'use HTTPS (default false)',
          long: '--ssl'
 
-  def run
-    protocol = config[:ssl] ? 'https' : 'http'
+  option :allmembers,
+         description: 'check health of all etcd members',
+         long: '--all',
+         short: '-a',
+         default: false
 
-    r = RestClient::Resource.new("#{protocol}://#{config[:server]}:#{config[:port]}/health",
-                                 timeout: 5,
-                                 ssl_client_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
-                                 ssl_client_key: (OpenSSL::PKey::RSA.new(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?),
-                                 ssl_ca_file:  config[:ca],
-                                 verify_ssl:  config[:insecure] ? 0 : 1
-                                ).get
-    if r.code == 200 && JSON.parse(r.to_str)['health'] == 'true'
-      ok 'Etcd healthy'
+  def run
+    if config[:allmembers]
+      members = JSON.parse(request('/v2/members', config[:server]).to_str)['members']
+      bad_peers = []
+      members.each do |member|
+        client_host = URI.parse(member['clientURLs'][0]).host
+        r = request('/health', client_host)
+        unless r.code == 200 && JSON.parse(r.to_str)['health'] == 'true'
+          bad_peers += [client_host]
+        end
+      end
+      if bad_peers.count != 0
+        critical "Found bad etcd peers: #{bad_peers}"
+      else
+        ok 'Etcd healthly'
+      end
     else
-      critical 'Etcd unhealthy'
+      r = request('/health', config[:server])
+      if r.code == 200 && JSON.parse(r.to_str)['health'] == 'true'
+        ok 'Etcd healthy'
+      else
+        critical 'Etcd unhealthy'
+      end
     end
-  rescue Errno::ECONNREFUSED
-    critical 'Etcd is not responding'
+
+  rescue Errno::ECONNREFUSED => e
+    critical 'Etcd is not responding' + e.message
   rescue RestClient::RequestTimeout
     critical 'Etcd Connection timed out'
+  rescue StandardError => e
+    unknown 'A exception occurred:' + e.message
+  end
+
+  def request(path, server)
+    protocol = config[:ssl] ? 'https' : 'http'
+    RestClient::Resource.new("#{protocol}://#{server}:#{config[:port]}/#{path}",
+                             timeout: 5,
+                             ssl_client_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
+                             ssl_client_key: (OpenSSL::PKey::RSA.new(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?),
+                             ssl_ca_file:  config[:ca],
+                             verify_ssl:  config[:insecure] ? 0 : 1
+                            ).get
   end
 end
