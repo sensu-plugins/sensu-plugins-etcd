@@ -87,8 +87,12 @@ class EtcdNodeStatus < Sensu::Plugin::Check::CLI
       bad_peers = []
       members.each do |member|
         client_host = URI.parse(member['clientURLs'][0]).host
-        r = request('/health', client_host)
-        unless r.code == 200 && JSON.parse(r.to_str)['health'] == 'true'
+        begin
+          r = request('/health', client_host)
+          unless r.code == 200 && JSON.parse(r.to_str)['health'] == 'true'
+            bad_peers += [client_host]
+          end
+        rescue StandardError
           bad_peers += [client_host]
         end
       end
