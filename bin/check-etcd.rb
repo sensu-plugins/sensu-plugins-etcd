@@ -121,7 +121,6 @@ class EtcdNodeStatus < Sensu::Plugin::Check::CLI
                              ssl_client_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
                              ssl_client_key: (OpenSSL::PKey::RSA.new(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?),
                              ssl_ca_file:  config[:ca],
-                             verify_ssl:  config[:insecure] ? 0 : 1
-                            ).get
+                             verify_ssl:  config[:insecure] ? 0 : 1).get
   end
 end
