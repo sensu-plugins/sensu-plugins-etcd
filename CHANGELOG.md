@@ -6,6 +6,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ## [Unreleased]
 - Added full cluster health check option for check-etcd
 - Added healthy peer count check
+- Adding flanneld subnet check for etcd
 
 ## [0.1.0] - 2015-08-27
 ### Added
