@@ -29,6 +29,7 @@
 require 'sensu-plugin/check/cli'
 require 'rest-client'
 require 'openssl'
+require 'json'
 
 #
 # Etcd Node Status
