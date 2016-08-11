@@ -4,8 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.0.0] - 2016-08-10
 ### Changed
 - Removed Ruby 1.9 support
+- Updated sensu-plugin dependency from `= 1.2.0` to `~> 1.3`
+
 ### Added
 - Added full cluster health check option for check-etcd
 - Added healthy peer count check
@@ -31,7 +35,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.1.0...HEAD
-[0.1.0]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.0.3...0.0.4
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.1.0...1.0.0
+[0.1.0]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.0.3...0.1.0
 [0.0.3]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.0.1...0.0.2

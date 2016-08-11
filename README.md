@@ -10,6 +10,8 @@
 
 ## Files
  * bin/check-etcd.rb
+ * bin/check-etcd-peer-count.rb
+ * bin/check-flannel-subnet-count.rb
  * bin/metrics-etcd.rb
 
 ## Usage
