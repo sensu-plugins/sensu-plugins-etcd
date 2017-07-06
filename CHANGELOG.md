@@ -4,7 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
-### Changes
+### Changed
 - Updated Travis configuration to include Ruby 2.4.1
 
 ## [1.0.0] - 2016-08-10
