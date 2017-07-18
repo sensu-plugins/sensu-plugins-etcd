@@ -1,6 +1,6 @@
 ## Sensu-Plugins-etcd
 
-[ ![Build Status](https://travis-ci.org/sensu-plugins/sensu-plugins-etcd.svg?branch=master)](https://travis-ci.org/sensu-plugins/sensu-plugins-etcd)
+[![Build Status](https://travis-ci.org/sensu-plugins/sensu-plugins-etcd.svg?branch=master)](https://travis-ci.org/sensu-plugins/sensu-plugins-etcd)
 [![Gem Version](https://badge.fury.io/rb/sensu-plugins-etcd.svg)](http://badge.fury.io/rb/sensu-plugins-etcd)
 [![Code Climate](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd/badges/gpa.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd)
 [![Test Coverage](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd/badges/coverage.svg)](https://codeclimate.com/github/sensu-plugins/sensu-plugins-etcd)
