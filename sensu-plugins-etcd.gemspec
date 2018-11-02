@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.test_files             = s.files.grep(%r{^(test|spec|features)/})
   s.version                = SensuPluginsEtcd::Version::VER_STRING
 
-  s.add_runtime_dependency 'rest-client',  '1.8.0'
+  s.add_runtime_dependency 'rest-client',  '= 2.0.2'
   s.add_runtime_dependency 'sensu-plugin', '~> 1.3'
   s.add_runtime_dependency 'etcd',         '0.3.0'
 
