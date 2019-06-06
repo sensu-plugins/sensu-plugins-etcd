@@ -6,6 +6,7 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ## [Unreleased]
 ### Changed
 - Updated Travis configuration to include Ruby 2.4.1
+- Updated to be compatible with other type of private keys than RSA
 
 ### Removed
 - Ruby 1.9.3 from deploy-time testing (@eheydrick)
