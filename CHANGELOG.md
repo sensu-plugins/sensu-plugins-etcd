@@ -4,9 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachangelog.com/)
 
 ## [Unreleased]
+
+## [1.1.0] - 2019-06-11
+### Added
+- Updated to be compatible with other type of private keys than RSA (@CoRf)
+
 ### Changed
 - Updated Travis configuration to include Ruby 2.4.1
-- Updated to be compatible with other type of private keys than RSA
 
 ### Removed
 - Ruby 1.9.3 from deploy-time testing (@eheydrick)
@@ -41,7 +45,8 @@ This CHANGELOG follows the format listed at [Keep A Changelog](http://keepachang
 ### Added
 - initial release
 
-[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.1.0...1.0.0
 [0.1.0]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.0.3...0.1.0
 [0.0.3]: https://github.com/sensu-plugins/sensu-plugins-etcd/compare/0.0.2...0.0.3
