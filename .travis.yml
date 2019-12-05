@@ -19,8 +19,10 @@ script:
 - bundle exec rake default
 - gem build sensu-plugins-etcd.gemspec
 - gem install sensu-plugins-etcd-*.gem
+before_deploy:
+- bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"
 deploy:
-  provider: rubygems
+- provider: rubygems
   api_key:
     secure: ZylST9p7ShWqGBTPxuu+iBWpmpBZ8TXbzFj6gdgdQKFKiV8TL+7GRgj7uXneose9kB5ssr1H1AfZn4X6AD3KA4RpbQzAi1f20KKU2o+n1uQq/IIPsLecbijpiJZCCV6ZN/3XjxGL2y9m9jtslEOPaxuGTSTiZSuU0aEJb96M/Kg=
   gem: sensu-plugins-etcd
@@ -33,3 +35,10 @@ deploy:
     rvm: 2.3.0
     rvm: 2.4.1
     repo: sensu-plugins/sensu-plugins-etcd
+- provider: script
+  script: bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-etcd
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    rvm: 2.4.1
