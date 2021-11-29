@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: false
+
 #
 #   check-flannel-subnet-count
 #
@@ -83,7 +85,8 @@ class FlannelSubnetStatus < Sensu::Plugin::Check::CLI
          proc: proc(&:to_i)
 
   def run
-    begin # Get the network configuration
+    # Get the network configuration
+    begin
       flannel_config = request('v2/keys/coreos.com/network/config', config[:server])
       # The value is stored as a json string within the json, so we have to parse, pull out the string and re-parse...
       num_address = JSON.parse(JSON.parse(flannel_config.to_str)['node']['value'])['Network']
@@ -92,7 +95,8 @@ class FlannelSubnetStatus < Sensu::Plugin::Check::CLI
       critical "Could not fetch network configuration: #{e.message}"
     end
 
-    begin # Calculate the number of available subnets
+    # Calculate the number of available subnets
+    begin
       network_cidr = num_address[num_address.index('/') + 1..-1]
       num_addresses = 2**(32 - network_cidr.to_i)
       num_subnets = num_addresses / (2**(32 - subnet_len.to_i))
@@ -100,7 +104,8 @@ class FlannelSubnetStatus < Sensu::Plugin::Check::CLI
       critical "Could not parse network configuration: #{e.message}"
     end
 
-    begin # Calculate the  actual number of subnets in use
+    # Calculate the  actual number of subnets in use
+    begin
       data = JSON.parse(request('v2/keys/coreos.com/network/subnets', config[:server]))
       num_address_used = data['node']['nodes'].size
     rescue StandardError => e
@@ -123,8 +128,8 @@ class FlannelSubnetStatus < Sensu::Plugin::Check::CLI
       timeout: 5,
       ssl_client_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
       ssl_client_key: (OpenSSL::PKey.read(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?),
-      ssl_ca_file:  config[:ca],
-      verify_ssl:  config[:insecure] ? 0 : 1
+      ssl_ca_file: config[:ca],
+      verify_ssl: config[:insecure] ? 0 : 1
     ).get
   end
 end

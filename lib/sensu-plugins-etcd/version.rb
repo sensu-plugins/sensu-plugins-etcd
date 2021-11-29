@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module SensuPluginsEtcd
   module Version
     MAJOR = 1

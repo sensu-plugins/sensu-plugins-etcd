@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: false
+
 #
 #   check-etcd
 #
@@ -110,7 +112,6 @@ class EtcdNodeStatus < Sensu::Plugin::Check::CLI
         critical 'Etcd unhealthy'
       end
     end
-
   rescue Errno::ECONNREFUSED => e
     critical 'Etcd is not responding' + e.message
   rescue RestClient::RequestTimeout
@@ -125,7 +126,7 @@ class EtcdNodeStatus < Sensu::Plugin::Check::CLI
                              timeout: 5,
                              ssl_client_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
                              ssl_client_key: (OpenSSL::PKey.read(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?),
-                             ssl_ca_file:  config[:ca],
-                             verify_ssl:  config[:insecure] ? 0 : 1).get
+                             ssl_ca_file: config[:ca],
+                             verify_ssl: config[:insecure] ? 0 : 1).get
   end
 end
