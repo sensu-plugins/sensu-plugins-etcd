@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: false
+
 #
 #   etcd-metrics
 #
@@ -88,19 +90,19 @@ class EtcdMetrics < Sensu::Plugin::Metric::CLI::Graphite
          long: '--ssl'
 
   def run
-    if config[:ssl]
-      client = Etcd.client(
-        host: config[:etcd_host],
-        port: config[:etcd_port],
-        use_ssl: config[:ssl],
-        verify_mode: (config[:insecure] ? OpenSSL::SSL::VERIFY_NONE : OpenSSL::SSL::VERIFY_PEER),
-        ca_file: config[:ca],
-        ssl_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
-        ssl_key:  (OpenSSL::PKey.read(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?)
-      )
-    else
-      client = Etcd.client(host: config[:etcd_host], port: config[:etcd_port])
-    end
+    client = if config[:ssl]
+               Etcd.client(
+                 host: config[:etcd_host],
+                 port: config[:etcd_port],
+                 use_ssl: config[:ssl],
+                 verify_mode: (config[:insecure] ? OpenSSL::SSL::VERIFY_NONE : OpenSSL::SSL::VERIFY_PEER),
+                 ca_file: config[:ca],
+                 ssl_cert: (OpenSSL::X509::Certificate.new(File.read(config[:cert])) unless config[:cert].nil?),
+                 ssl_key: (OpenSSL::PKey.read(File.read(config[:key]), config[:passphrase]) unless config[:key].nil?)
+               )
+             else
+               Etcd.client(host: config[:etcd_host], port: config[:etcd_port])
+             end
     client.stats(:self).each do |k, v|
       output([config[:scheme], 'self', k].join('.'), v) if v.is_a? Integer
     end
